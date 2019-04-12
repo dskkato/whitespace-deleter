@@ -24,14 +24,10 @@ fn main() -> io::Result<()> {
 
     for line in reader.lines() {
         let line = line.unwrap();
-        let v: Vec<&str> = line.splitn(3, ' ').collect();
-        write!(writer, "{},{}", &v[0], &v[0])?;
-        for c in v[2].chars() {
-            if c.is_whitespace() {
-                continue;
-            } else {
-                write!(writer, "{}", c)?;
-            }
+        let v: Vec<&str> = line.splitn(106, ',').collect();
+        write!(writer, "{},{}", &v[0], &v[1])?;
+        for item in &v[2..] {
+            write!(writer, ",{}", item.trim())?;
         }
         writeln!(writer)?;
     }
